@@ -1,3 +1,43 @@
+# Advanced Todo List App
+
+A feature-rich task management application with Firebase integration, OpenAI-powered summaries, and responsive design.
+
+## Features
+
+- Task management with priorities
+- Date-based filtering
+- Task planning for tomorrow
+- Daily summaries powered by OpenAI
+- Dark mode for different preferences
+- Authentication with Google
+- Firebase real-time database
+- Responsive design for all devices
+- Progressive Web App (PWA) support for installation
+- Offline capabilities
+
+## Installation
+
+1. Clone the repository
+2. Install dependencies: `npm install`
+3. Start the development server: `npm start`
+
+## Deployment
+
+This application can be deployed on Vercel, Netlify, or any static site hosting service.
+
+For production build:
+```
+npm run build
+```
+
+## Technologies Used
+
+- React
+- Firebase (Authentication & Realtime Database)
+- Progressive Web App (PWA)
+- OpenAI API for task summaries
+- CSS3 with responsive design
+
 ## Todo List App
 
 A modern, responsive task management application with the following features:
