@@ -1,18 +1,27 @@
 :root {
-  --app-max-width: 900px;
-  --app-padding: 2.5rem;
-  --sidebar-width: 280px;
-  --primary-color: #5662ea;
-  --primary-dark: #4250e0;
-  --secondary-color: #8b8b99;
-  --success-color: #28a745;
-  --text-color: #333;
-  --text-light: #999;
-  --text-dark: #222;
-  --background-color: #f8f9fa;
-  --hover-color: #f0f0f0;
+  --primary-color: #5b68eb;
+  --primary-hover: #4452d9;
+  --primary-light: rgba(91, 104, 235, 0.15);
+  --secondary-color: #6c757d;
+  --success-color: #10b981;
+  --warning-color: #f59e0b;
+  --danger-color: #ef4444;
+  --info-color: #3b82f6;
+  --text-color: #333333;
+  --text-light: #6b7280;
+  --text-dark: #111827;
+  --background-color: #f3f4f6;
   --card-bg: #ffffff;
-  --border-color: #e0e0e0;
+  --border-color: #e5e7eb;
+  --border-radius: 12px;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --transition: all 0.3s ease;
+  --app-max-width: 1200px;
+  --app-padding: 2rem;
+  --sidebar-width: 300px;
+  --header-height: 70px;
 }
 
 /* TV and large monitors */
@@ -24,19 +33,19 @@
   }
 }
 
-.app {
+/* .app {
   max-width: var(--app-max-width);
   margin: 2rem auto;
   padding: var(--app-padding);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background-color: white;
+  background-color: rgb(70, 76, 107);
   border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 30px rgba(248, 246, 246, 0.1);
   transition: all 0.3s ease;
   display: grid;
   grid-template-columns: 1fr;
   gap: 2rem;
-}
+} */
 
 /* Desktop layout */
 @media (min-width: 768px) {
@@ -255,23 +264,23 @@ h1 {
 
 /* Updated button styles */
 .theme-toggle {
-  width: 35px;
-  height: 35px;
+  width: 38px;
+  height: 38px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.15);
   border: none;
-  font-size: 1rem;
+  font-size: 1.1rem;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: var(--transition);
   color: white;
 }
 
 .theme-toggle:hover {
-  background-color: rgba(255, 255, 255, 0.25);
-  transform: rotate(12deg);
+  background-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
 }
 
 .logout-button {
@@ -315,14 +324,91 @@ h1 {
   .app-header-controls {
     width: 100%;
     justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
   }
 
   .user-greeting {
-    flex: 1;
+    flex: 0 1 auto;
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
   }
   
   .greeting-text {
     font-size: 0.8rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .logout-button {
+    position: relative;
+    z-index: 10;
+    padding: 6px 10px;
+    margin-left: auto;
+  }
+  
+  .theme-toggle {
+    width: 32px;
+    height: 32px;
+  }
+  
+  /* Ensure elements don't overlap */
+  .header-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+/* Small mobile phones */
+@media (max-width: 480px) {
+  .app-header-controls {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .header-actions {
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+  }
+  
+  .user-greeting {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .logout-button {
+    padding: 6px 8px;
+  }
+  
+  .logout-button span {
+    display: none;
+  }
+  
+  .logout-button svg {
+    margin: 0;
+  }
+}
+
+/* Desktop and larger adjustments */
+@media (min-width: 1024px) {
+  .app-header {
+    padding: 0.75rem 1.5rem;
+  }
+  
+  .user-greeting {
+    padding: 8px 16px;
+  }
+  
+  .logout-button {
+    padding: 8px 16px;
+  }
+  
+  .theme-toggle {
+    width: 40px;
+    height: 40px;
   }
 }
 
@@ -560,24 +646,6 @@ h1 {
   }
 }
 
-/* TV mode adjustments for summary button */
-.app.tv-mode .summarize-button {
-  padding: 1rem 1.5rem;
-  font-size: 1.1rem;
-}
-
-@media (min-width: 1920px) {
-  .app.tv-mode .summarize-button {
-    padding: 1.25rem 1.75rem;
-    font-size: 1.3rem;
-  }
-  
-  .app.tv-mode .summarize-button svg {
-    width: 22px;
-    height: 22px;
-  }
-}
-
 /* Redesigned Summary container styles */
 .summary-container {
   position: fixed;
@@ -732,30 +800,6 @@ h1 {
   to { transform: rotate(360deg); }
 }
 
-/* TV mode adjustments */
-.app.tv-mode .summary-container {
-  max-width: 800px;
-}
-
-.app.tv-mode .summary-header h2 {
-  font-size: 1.75rem;
-}
-
-.app.tv-mode .summary-content {
-  font-size: 1.4rem;
-  padding: 2.5rem;
-}
-
-.app.tv-mode .summary-action {
-  width: 50px;
-  height: 50px;
-}
-
-.app.tv-mode .summary-action svg {
-  width: 24px;
-  height: 24px;
-}
-
 /* Dark mode adjustments */
 .dark-mode .summary-container {
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
@@ -824,19 +868,71 @@ h1 {
   font-style: italic;
 }
 
-/* TV mode adjustments */
-.app.tv-mode .past-tasks-button {
-  padding: 0.75rem 1.5rem;
-  font-size: 1.1rem;
+/* User Profile Styles with Greeting and Avatar */
+.user-profile {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-.app.tv-mode .past-tasks-info {
+.user-profile-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.user-profile-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--primary-color);
+}
+
+.user-profile-name {
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.user-profile-email {
+  font-size: 0.8rem;
+  color: var(--text-light);
+}
+
+.user-profile-logout {
+  background-color: transparent;
+  border: 1px solid #e0e0e0;
+  color: var(--text-color);
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
   font-size: 0.9rem;
 }
 
-/* User Profile Styles with Greeting and Avatar */
-.user-profile {
-  display: none;
+.user-profile-logout:hover {
+  background-color: #f8f8f8;
+  border-color: #d0d0d0;
+}
+
+/* Dark mode adjustments */
+.dark-mode .user-profile {
+  background-color: #2a2b3d;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .user-profile-logout {
+  border-color: #3a3a3a;
+  color: #e0e0e0;
+}
+
+.dark-mode .user-profile-logout:hover {
+  background-color: #3a3a3a;
 }
 
 /* App loading screen */
@@ -939,26 +1035,4 @@ h1 {
 
 .dark-mode .summary-options {
   border-top-color: rgba(255, 255, 255, 0.1);
-}
-
-/* TV mode adjustments */
-.app.tv-mode .summary-options {
-  margin-top: 3rem;
-  padding-top: 2rem;
-}
-
-.app.tv-mode .summary-option-toggle label {
-  font-size: 1.2rem;
-  gap: 1rem;
-}
-
-.app.tv-mode .summary-option-toggle input[type="checkbox"] {
-  width: 24px;
-  height: 24px;
-}
-
-.app.tv-mode .regenerate-summary {
-  padding: 0.8rem 1.5rem;
-  font-size: 1.2rem;
-  border-radius: 12px;
 }

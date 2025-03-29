@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Work Status",
+  "name": "Work Status - Task Manager",
   "icons": [
     {
       "src": "favicon.ico",
@@ -10,16 +10,41 @@
     {
       "src": "logo192.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "192x192",
+      "purpose": "any maskable"
     },
     {
       "src": "logo512.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "512x512",
+      "purpose": "any maskable"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "orientation": "portrait",
+  "theme_color": "#5b68eb",
+  "background_color": "#f3f4f6",
+  "description": "Manage your tasks efficiently with Work Status",
+  "categories": ["productivity", "utilities", "lifestyle"],
+  "screenshots": [
+    {
+      "src": "screenshot1.png",
+      "sizes": "1280x720",
+      "type": "image/png"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Add Task",
+      "url": "/?action=add",
+      "description": "Create a new task"
+    },
+    {
+      "name": "View Summary",
+      "url": "/?action=summary",
+      "description": "View your task summary"
+    }
+  ]
 }

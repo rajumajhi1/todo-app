@@ -1,17 +1,25 @@
-# Advanced Todo List App
+## Todo List App
 
-A feature-rich task management application with Firebase integration, OpenAI-powered summaries, and responsive design.
+A modern, responsive task management application with the following features:
 
-## Features
+- Create, edit, and delete tasks
+- Set task priorities (Low, Normal, High)
+- Mark tasks as complete
+- Plan tasks for tomorrow
+- Filter tasks by status and date
+- Daily task summary generation
+- Dark mode for different devices
+- Responsive design for mobile, tablet, and desktop
+- Firebase authentication and data storage
+- Export/import tasks
 
-- Tasks management with priorities
-- Date-based filtering
-- Tasks planning for tomorrow
-- Daily summaries powered by OpenAI
-- Dark mode & TV mode for different devices
-- Authentication with Google
-- Firebase real-time database
-- Responsive design for all devices
+### How to Use
+
+1. Sign in with your Google account
+2. Add tasks with priorities
+3. Use filters to organize your view
+4. Mark tasks as complete when done
+5. Generate daily summaries of your accomplishments
 
 ## Set Up Development Environment
 

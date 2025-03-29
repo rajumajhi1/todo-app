@@ -351,15 +351,4 @@
 
 .plan-tomorrow-btn.planned {
   color: #3498db;
-}
-
-/* TV mode adjustments */
-.app.tv-mode .plan-tomorrow-btn {
-  padding: 8px;
-  margin-left: 8px;
-}
-
-.app.tv-mode .plan-tomorrow-btn svg {
-  width: 24px;
-  height: 24px;
 } 

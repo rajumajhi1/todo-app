@@ -117,7 +117,7 @@ function generateLocalSummary(completedTasks, pendingTasks = [], plannedTasks = 
     }
     
     // Format the task text without quotes and ensure proper spacing
-    const taskText = `${priorityPrefix}${task.text}${label}`;
+    const taskText = `${priorityPrefix}${task.text} ${label}`;
     
     // Add appropriate line breaks
     return taskText + (config.doubleLineBreaks ? '\n\n' : '\n');

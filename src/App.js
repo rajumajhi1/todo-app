@@ -14,7 +14,6 @@ function AppWithAuth() {
   const [darkMode, setDarkMode] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [lastSaved, setLastSaved] = useState(null);
-  const [tvMode, setTvMode] = useState(false);
   const [showSummary, setShowSummary] = useState(false);
   const [summary, setSummary] = useState('');
   const [isGeneratingSummary, setIsGeneratingSummary] = useState(false);
@@ -376,11 +375,6 @@ function AppWithAuth() {
     document.body.className = !darkMode ? 'dark-mode' : '';
   };
 
-  const toggleTvMode = () => {
-    setTvMode(!tvMode);
-    document.body.classList.toggle('tv-mode', !tvMode);
-  };
-
   const getCompletionMessage = () => {
     if (todos.length === 0) return "Add your first task to get started!";
     
@@ -611,7 +605,7 @@ function AppWithAuth() {
   }
 
   return (
-    <div className={`app ${darkMode ? 'dark' : ''} ${tvMode ? 'tv-mode' : ''}`}>
+    <div className={`app ${darkMode ? 'dark' : ''}`}>
       {authLoading || isLoading ? (
         <div className="loading-container">
           <div className="loading-spinner"></div>
@@ -642,9 +636,6 @@ function AppWithAuth() {
               <div className="header-actions">
                 <button className="theme-toggle" onClick={toggleDarkMode} aria-label="Toggle dark mode">
                   {darkMode ? '☀️' : '🌙'}
-                </button>
-                <button className="theme-toggle tv-toggle" onClick={toggleTvMode} aria-label="Toggle TV mode">
-                  {tvMode ? '📱' : '📺'}
                 </button>
                 <button className="logout-button" onClick={handleLogout}>
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
