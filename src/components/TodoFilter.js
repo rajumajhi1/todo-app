@@ -3,24 +3,36 @@ import './TodoFilter.css';
 
 function TodoFilter({ filter, setFilter }) {
   return (
-    <div className="todo-filter">
+    <div className="filter-container">
       <button
-        className={`filter-button ${filter === 'all' ? 'active' : ''}`}
+        className={filter === 'all' ? 'active' : ''}
         onClick={() => setFilter('all')}
       >
         All
       </button>
       <button
-        className={`filter-button ${filter === 'active' ? 'active' : ''}`}
+        className={filter === 'today' ? 'active' : ''}
+        onClick={() => setFilter('today')}
+      >
+        Today
+      </button>
+      <button
+        className={filter === 'active' ? 'active' : ''}
         onClick={() => setFilter('active')}
       >
         Active
       </button>
       <button
-        className={`filter-button ${filter === 'completed' ? 'active' : ''}`}
+        className={filter === 'completed' ? 'active' : ''}
         onClick={() => setFilter('completed')}
       >
         Completed
+      </button>
+      <button
+        className={filter === 'planned' ? 'active' : ''}
+        onClick={() => setFilter('planned')}
+      >
+        Planned
       </button>
     </div>
   );

@@ -68,3 +68,20 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## OpenAI Integration
+
+This app includes integration with OpenAI's API to generate summaries of completed tasks. To use this feature:
+
+1. Create an account on [OpenAI](https://platform.openai.com/) if you don't have one already
+2. Generate an API key in your OpenAI dashboard
+3. Copy the `.env.example` file to a new file named `.env`
+4. Add your OpenAI API key to the `.env` file:
+   ```
+   REACT_APP_OPENAI_API_KEY=your_openai_api_key_here
+   ```
+5. Restart the development server if it's already running
+
+**IMPORTANT SECURITY NOTE:** Never commit your `.env` file with your API key to version control. The `.env` file is listed in `.gitignore` to prevent accidental commits.
+
+For production deployment, set your environment variables through your hosting provider's dashboard (e.g., Vercel, Netlify, etc.) rather than in the `.env` file.
