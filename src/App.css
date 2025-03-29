@@ -352,6 +352,9 @@ h1 {
   .theme-toggle {
     width: 32px;
     height: 32px;
+     position: absolute; /* Change this if needed */
+    left: 45px; /* Adjust as needed */
+        top: 142px;  /* Adjust as needed */
   }
   
   /* Ensure elements don't overlap */
