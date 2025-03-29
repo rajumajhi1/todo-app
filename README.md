@@ -1,3 +1,88 @@
+# Advanced Todo List App
+
+A feature-rich task management application with Firebase integration, OpenAI-powered summaries, and responsive design.
+
+## Features
+
+- Tasks management with priorities
+- Date-based filtering
+- Tasks planning for tomorrow
+- Daily summaries powered by OpenAI
+- Dark mode & TV mode for different devices
+- Authentication with Google
+- Firebase real-time database
+- Responsive design for all devices
+
+## Set Up Development Environment
+
+1. Clone the repository
+2. Install dependencies
+   ```
+   npm install
+   ```
+3. Copy the `.env.example` file to a new file named `.env`
+4. Add your API keys to the `.env` file:
+   - OpenAI API key (for task summaries)
+   - Firebase configuration details
+
+## Firebase Setup
+
+1. Create a new project on [Firebase Console](https://console.firebase.google.com/)
+2. Enable Firestore Database
+3. Set up Authentication with Google provider
+4. Create a web app and copy your Firebase configuration
+5. Add the configuration details to your `.env` file
+
+## Running the App Locally
+
+```
+npm start
+```
+
+The app will be available at [http://localhost:3000](http://localhost:3000).
+
+## Deployment to Vercel
+
+### Prerequisites
+- A Vercel account
+- Vercel CLI installed (optional)
+
+### Deployment Steps
+
+1. Push your code to a GitHub repository
+
+2. Connect your repository to Vercel:
+   - Go to [Vercel Dashboard](https://vercel.com/dashboard)
+   - Click "New Project"
+   - Import your GitHub repository
+   - Configure environment variables (all the ones from your `.env` file)
+   - Deploy
+
+3. Alternatively, use the Vercel CLI:
+   ```
+   npm install -g vercel
+   vercel login
+   vercel
+   ```
+
+4. For subsequent deployments, just push to your repository or run `vercel` again.
+
+## Environment Variables
+
+Make sure to add these environment variables to your Vercel project:
+
+- `REACT_APP_FIREBASE_API_KEY`
+- `REACT_APP_FIREBASE_AUTH_DOMAIN`
+- `REACT_APP_FIREBASE_PROJECT_ID`
+- `REACT_APP_FIREBASE_STORAGE_BUCKET`
+- `REACT_APP_FIREBASE_MESSAGING_SENDER_ID`
+- `REACT_APP_FIREBASE_APP_ID`
+- `REACT_APP_OPENAI_API_KEY`
+
+## Security Note
+
+Never commit your `.env` file with API keys to version control. Always use environment variables for sensitive information.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

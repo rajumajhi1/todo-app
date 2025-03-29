@@ -1,0 +1,250 @@
+/* Login page - Mobile First Design */
+.login-container {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f5f5;
+}
+
+/* Animated background */
+.login-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #1b1c31;
+  z-index: -2;
+}
+
+.login-shapes {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.shape {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.03);
+  border-radius: 50%;
+}
+
+.shape-1 {
+  width: 150px;
+  height: 150px;
+  top: 10%;
+  right: 5%;
+  opacity: 0.4;
+}
+
+.shape-2 {
+  width: 100px;
+  height: 100px;
+  bottom: 10%;
+  left: 5%;
+  opacity: 0.2;
+}
+
+.shape-3 {
+  width: 80px;
+  height: 80px;
+  top: 40%;
+  right: 15%;
+  opacity: 0.3;
+}
+
+/* Login card */
+.login-card {
+  background-color: #1e1f35;
+  width: 85%;
+  max-width: 320px;
+  border-radius: 20px;
+  padding: 40px 30px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* App logo */
+.app-logo {
+  width: 70px;
+  height: 70px;
+  background-color: #4250e0;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  box-shadow: 0 10px 20px rgba(66, 80, 224, 0.3);
+}
+
+.app-logo svg {
+  width: 40px;
+  height: 40px;
+  color: white;
+}
+
+/* Typography */
+.login-card h1 {
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.5px;
+}
+
+.login-subtitle {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1rem;
+  margin-bottom: 30px;
+}
+
+/* Google sign-in button */
+.google-sign-in {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 14px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 32px;
+}
+
+.google-sign-in:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.google-sign-in:active {
+  transform: scale(0.98);
+}
+
+.google-sign-in:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.google-icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* Error message */
+.login-error {
+  color: #ff6b6b;
+  background-color: rgba(255, 107, 107, 0.1);
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+/* Features */
+.login-features {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+}
+
+.feature-icon {
+  min-width: 36px;
+  height: 36px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feature-icon svg {
+  width: 18px;
+  height: 18px;
+  color: #4250e0;
+}
+
+.feature-item span {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.95rem;
+}
+
+/* Footer */
+.login-footer {
+  margin-top: auto;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* Tablet and larger */
+@media (min-width: 768px) {
+  .login-card {
+    max-width: 360px;
+    padding: 45px 35px;
+  }
+  
+  .app-logo {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .app-logo svg {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .login-card h1 {
+    font-size: 2.2rem;
+  }
+  
+  .login-subtitle {
+    font-size: 1.1rem;
+  }
+}
+
+/* Desktop and larger */
+@media (min-width: 1200px) {
+  .shape-1 {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .shape-2 {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .shape-3 {
+    width: 120px;
+    height: 120px;
+  }
+} 

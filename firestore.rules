@@ -1,0 +1,26 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Allow public read access but only authenticated writes during development
+    match /{document=**} {
+      allow read: if true;
+      allow write: if true;
+    }
+    
+    // Example of more restrictive rules for production
+    // Uncomment these and comment out the rules above when ready for production
+    
+    // match /todos/{todoId} {
+    //   // Only authenticated users can create todos, and they must include their user ID
+    //   allow create: if request.auth != null && request.resource.data.userId == request.auth.uid;
+    //   
+    //   // Users can only read, update, and delete their own todos
+    //   allow read, update, delete: if request.auth != null && resource.data.userId == request.auth.uid;
+    // }
+    //
+    // // Deny access to all other collections by default
+    // match /{document=**} {
+    //   allow read, write: if false;
+    // }
+  }
+} 

@@ -168,32 +168,162 @@ h1 {
   font-size: 0.9rem;
 }
 
+/* Updated modern header */
 .app-header {
-  position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin-bottom: 1rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--border-color);
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  box-shadow: 0 4px 12px rgba(86, 98, 234, 0.2);
+  color: white;
+  transition: all 0.3s ease;
 }
 
-.app-header-controls {
-  position: absolute;
-  right: 0;
+.header-left {
   display: flex;
-  gap: 0.5rem;
+  align-items: center;
+}
+
+.header-left svg {
+  width: 28px;
+  height: 28px;
+  margin-right: 0.75rem;
+  color: white;
 }
 
 .app-header h1 {
-  margin-bottom: 0;
+  margin: 0;
+  color: white;
+  font-size: 1.5rem;
+  letter-spacing: -0.5px;
 }
 
-.app-header svg {
-  width: 30px;
-  height: 30px;
-  margin-right: 0.75rem;
-  color: #3a86ff;
+.app-header-controls {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* User greeting styles */
+.user-greeting {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 6px 12px;
+  border-radius: 30px;
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+}
+
+.user-greeting:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.greeting-text {
+  font-weight: 500;
+  color: white;
+  font-size: 0.85rem;
+}
+
+.user-name {
+  font-weight: 700;
+  color: white;
+}
+
+.user-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  transition: transform 0.3s ease;
+}
+
+.user-greeting:hover .user-avatar {
+  transform: scale(1.1);
+}
+
+/* Updated button styles */
+.theme-toggle {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: white;
+}
+
+.theme-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+  transform: rotate(12deg);
+}
+
+.logout-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.logout-button:hover {
+  background-color: rgba(255, 75, 75, 0.3);
+  transform: translateY(-2px);
+}
+
+.logout-button svg {
+  transition: transform 0.3s ease;
+  width: 16px;
+  height: 16px;
+}
+
+.logout-button:hover svg {
+  transform: translateX(3px);
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+  .app-header {
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+  }
+  
+  .app-header-controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .user-greeting {
+    flex: 1;
+  }
+  
+  .greeting-text {
+    font-size: 0.8rem;
+  }
 }
 
 .task-stats {
@@ -249,24 +379,6 @@ h1 {
 
 .search-input::placeholder {
   color: #999;
-}
-
-.theme-toggle {
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  transition: all 0.2s;
-  background: none;
-  border: none;
-  font-size: 1.2rem;
-  cursor: pointer;
-}
-
-.theme-toggle:hover {
-  background-color: rgba(0, 0, 0, 0.05);
 }
 
 .completion-message {
@@ -377,12 +489,34 @@ h1 {
 }
 
 .last-saved {
-  font-size: 0.75rem;
-  color: var(--text-color);
-  opacity: 0.7;
-  text-align: center;
-  margin-top: 0.5rem;
-  font-style: italic;
+  display: flex;
+  flex-direction: column;
+  font-size: 0.8rem;
+  color: var(--secondary-color);
+  margin-top: 8px;
+}
+
+.saved-timestamp {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.cloud-save-indicator {
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background-color: rgba(66, 80, 224, 0.08);
+  font-size: 0.8rem;
+  color: var(--primary-dark);
+}
+
+.cloud-save-indicator svg {
+  width: 14px;
+  height: 14px;
+  margin-right: 6px;
 }
 
 .summarize-button {
@@ -539,26 +673,35 @@ h1 {
 }
 
 .summary-task {
-  margin-bottom: 1.25rem;
-  padding-left: 1.5rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: baseline;
+  line-height: 1.6;
+  font-family: 'Courier New', monospace;
   position: relative;
-}
-
-.summary-task-number {
-  position: absolute;
-  left: 0;
-  font-weight: bold;
-  color: var(--primary-color);
+  padding-left: 0;
 }
 
 .summary-task-text {
   font-weight: 500;
+  color: var(--text-color);
+}
+
+.summary-task-done, .summary-task-pending, .summary-task-ongoing {
+  font-weight: 600;
+  margin-left: 5px;
 }
 
 .summary-task-done {
-  color: var(--success-color);
-  font-weight: 600;
-  font-style: italic;
+  color: #28a745;
+}
+
+.summary-task-pending {
+  color: #ffc107;
+}
+
+.summary-task-ongoing {
+  color: #17a2b8;
 }
 
 /* Loading spinner */
@@ -689,4 +832,133 @@ h1 {
 
 .app.tv-mode .past-tasks-info {
   font-size: 0.9rem;
+}
+
+/* User Profile Styles with Greeting and Avatar */
+.user-profile {
+  display: none;
+}
+
+/* App loading screen */
+.app-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: var(--background-color);
+}
+
+.app-loading .loading-spinner {
+  width: 60px;
+  height: 60px;
+  border: 6px solid rgba(0, 0, 0, 0.1);
+  border-left-color: var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1.2s linear infinite;
+  margin-bottom: 20px;
+}
+
+.app-loading p {
+  font-size: 1.2rem;
+  color: var(--secondary-color);
+  font-weight: 500;
+}
+
+/* Dark mode adjustments */
+.dark-mode .app-loading {
+  background-color: var(--dark-bg);
+}
+
+.dark-mode .app-loading .loading-spinner {
+  border-color: rgba(255, 255, 255, 0.1);
+  border-left-color: var(--primary-color);
+}
+
+.dark-mode .app-loading p {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Note: Dark mode adjustments for header elements are defined earlier in the file */
+
+/* Summary options styles */
+.summary-options {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.summary-option-toggle {
+  display: flex;
+  align-items: center;
+}
+
+.summary-option-toggle label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: var(--text-color);
+}
+
+.summary-option-toggle input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--primary-color);
+  cursor: pointer;
+}
+
+.regenerate-summary {
+  margin-top: 1rem;
+  padding: 0.6rem 1rem;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  width: fit-content;
+  align-self: center;
+}
+
+.regenerate-summary:hover:not(:disabled) {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+.regenerate-summary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.dark-mode .summary-options {
+  border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+/* TV mode adjustments */
+.app.tv-mode .summary-options {
+  margin-top: 3rem;
+  padding-top: 2rem;
+}
+
+.app.tv-mode .summary-option-toggle label {
+  font-size: 1.2rem;
+  gap: 1rem;
+}
+
+.app.tv-mode .summary-option-toggle input[type="checkbox"] {
+  width: 24px;
+  height: 24px;
+}
+
+.app.tv-mode .regenerate-summary {
+  padding: 0.8rem 1.5rem;
+  font-size: 1.2rem;
+  border-radius: 12px;
 }

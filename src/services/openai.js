@@ -9,120 +9,160 @@
 const API_URL = 'https://api.openai.com/v1/chat/completions';
 
 /**
- * Generates a summary of completed tasks using OpenAI.
+ * Generates a summary of tasks.
  * 
  * @param {Array} completedTasks - Array of tasks completed today
  * @param {Array} plannedTasks - Array of tasks planned for tomorrow
- * @returns {Promise<string>} - AI-generated summary
+ * @param {Array} pendingTasks - Array of pending tasks
+ * @param {Object} options - Configuration options
+ * @returns {Promise<string>} - Generated summary
  */
-export const generateTaskSummary = async (completedTasks, plannedTasks = []) => {
-  try {
-    // If using the API - make the call
-    if (process.env.REACT_APP_OPENAI_API_KEY) {
-      const response = await fetch(API_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`
-        },
-        body: JSON.stringify({
-          model: 'gpt-3.5-turbo',
-          messages: [
-            {
-              role: 'system',
-              content: `You are a task summarizer that creates summaries in this specific format:
-              
-              1. Format the date at the top in DD.MM.YY format (e.g., "27.03.25")
-              2. List each completed task as a numbered item
-              3. Add "done" after each completed task
-              4. Add double newlines between each item
-              
-              Example:
-              27.03.25
-              
-              1. BXHT (APDJ) Faults verification done
-              
-              2. BLK(KIR) Database entry done
-              
-              3. Bill Paper Preparation done
-              
-              4. Wrong Alarms Analysis done`
-            },
-            {
-              role: 'user',
-              content: `Generate a daily task summary for today (${new Date().toLocaleDateString('en-GB', {
-                day: '2-digit',
-                month: '2-digit',
-                year: '2-digit'
-              }).replace(/\//g, '.')}).
+export const generateTaskSummary = async (
+  completedTasks, 
+  plannedTasks = [], 
+  pendingTasks = [], 
+  options = {}
+) => {
+  // Default options
+  const config = {
+    formatOptions: {
+      dateFormat: 'DD.MM.YY',
+      includeTime: false,
+      priorityMarkers: false,
+      includeStats: false
+    },
+    ...options
+  };
 
-              These tasks were completed today:
-              ${JSON.stringify(completedTasks.map(task => task.text))}
-              
-              These tasks are planned for tomorrow:
-              ${JSON.stringify(plannedTasks.map(task => task.text))}
-              
-              Format the summary exactly as shown in the instructions with the date at the top, and a numbered list with "done" after each completed task. Include double line breaks between items.`
-            }
-          ],
-          max_tokens: 150,
-          temperature: 0.3 // Lower temperature for more predictable, factual responses
-        })
-      });
-      
-      if (!response.ok) {
-        const errorData = await response.json();
-        console.error('OpenAI API error:', errorData);
-        throw new Error(`API error: ${response.status}`);
-      }
-      
-      const data = await response.json();
-      return data.choices[0].message.content;
-    }
-    
-    // No API key - generate locally
-    return generateLocalSummary(completedTasks, plannedTasks);
+  try {
+    // Generate summary locally
+    return generateLocalSummary(completedTasks, pendingTasks, plannedTasks, config.formatOptions);
   } catch (error) {
-    console.error('Error generating OpenAI summary:', error);
-    return generateLocalSummary(completedTasks, plannedTasks);
+    console.error('Error generating summary:', error);
+    return "Error generating summary. Please try again.";
   }
 };
 
 /**
  * Generate a local summary without API call
+ * 
+ * @param {Array} completedTasks - Array of tasks completed today
+ * @param {Array} pendingTasks - Array of pending tasks
+ * @param {Array} plannedTasks - Array of tasks planned for tomorrow
+ * @param {Object} options - Optional configuration settings
+ * @returns {string} - Formatted summary text
  */
-function generateLocalSummary(completedTasks, plannedTasks) {
-  // Get current date in DD.MM.YY format
+function generateLocalSummary(completedTasks, pendingTasks = [], plannedTasks = [], options = {}) {
+  console.log('Generating summary with', {
+    completedTasks: completedTasks.length,
+    pendingTasks: pendingTasks.length,
+    plannedTasks: plannedTasks.length,
+    options
+  });
+  
+  // Default options
+  const config = {
+    dateFormat: 'DD.MM.YY',
+    includeTime: false,
+    completedLabel: 'done',
+    pendingLabel: 'pending',
+    plannedLabel: 'ongoing, not completed',
+    useQuotes: true,
+    doubleLineBreaks: true,
+    priorityMarkers: false,
+    ...options
+  };
+  
+  // Get current date in the requested format
   const today = new Date();
-  const dateStr = today.toLocaleDateString('en-GB', {
-    day: '2-digit',
-    month: '2-digit',
-    year: '2-digit'
-  }).replace(/\//g, '.');
+  let dateStr = '';
+  
+  if (config.dateFormat === 'DD.MM.YY') {
+    dateStr = today.toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: '2-digit',
+      year: '2-digit'
+    }).replace(/\//g, '.');
+  } else if (config.dateFormat === 'MM/DD/YYYY') {
+    dateStr = today.toLocaleDateString('en-US', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    });
+  } else if (config.dateFormat === 'YYYY-MM-DD') {
+    dateStr = today.toLocaleDateString('en-CA');
+  }
+  
+  // Add time if requested
+  if (config.includeTime) {
+    const timeStr = today.toLocaleTimeString('en-US', {
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+    dateStr += ` ${timeStr}`;
+  }
+  
+  // Helper function to format a task
+  const formatTask = (task, label) => {
+    let priorityPrefix = '';
+    
+    // Add priority markers if enabled
+    if (config.priorityMarkers && task.priority) {
+      const markers = {
+        high: '🔴 ',
+        normal: '🟡 ',
+        low: '🟢 '
+      };
+      priorityPrefix = markers[task.priority] || '';
+    }
+    
+    // Format the task text without quotes and ensure proper spacing
+    const taskText = `${priorityPrefix}${task.text}${label}`;
+    
+    // Add appropriate line breaks
+    return taskText + (config.doubleLineBreaks ? '\n\n' : '\n');
+  };
   
   // Start with date header
   let summary = `${dateStr}\n\n`;
   
-  // Add completed tasks as numbered list
+  // Add completed tasks
   if (completedTasks.length > 0) {
-    completedTasks.forEach((task, index) => {
-      summary += `${index + 1}. ${task.text} done\n\n`;
+    completedTasks.forEach(task => {
+      summary += formatTask(task, config.completedLabel);
     });
-  } else {
-    summary += 'No tasks were completed today.\n\n';
   }
   
-  // Add planned tasks as continued numbered list if there are any
+  // Add pending tasks
+  if (pendingTasks.length > 0) {
+    pendingTasks.forEach(task => {
+      summary += formatTask(task, config.pendingLabel);
+    });
+  }
+  
+  // Add tasks planned for tomorrow
   if (plannedTasks.length > 0) {
-    let startIndex = completedTasks.length + 1;
-    plannedTasks.forEach((task, index) => {
-      // Don't add tasks that were already included in completed list
-      if (!completedTasks.some(t => t.id === task.id)) {
-        summary += `${startIndex + index}. ${task.text} planned for tomorrow\n\n`;
-      }
+    plannedTasks.forEach(task => {
+      summary += formatTask(task, config.plannedLabel);
     });
   }
   
+  // Add statistics at the bottom if requested
+  if (options.includeStats) {
+    const totalTasks = completedTasks.length + pendingTasks.length;
+    const completionRate = totalTasks > 0 
+      ? Math.round((completedTasks.length / totalTasks) * 100) 
+      : 0;
+    
+    summary += `\nSummary: ${completedTasks.length} completed, ${pendingTasks.length} pending`;
+    summary += `\nCompletion rate: ${completionRate}%`;
+    
+    if (plannedTasks.length > 0) {
+      summary += `\n${plannedTasks.length} tasks planned for tomorrow`;
+    }
+  }
+  
+  console.log('Generated summary:', summary);
   return summary.trim();
 }
 
